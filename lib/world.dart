@@ -52,6 +52,7 @@ class _WorldPageState extends State<WorldPage>
   Widget build(BuildContext context) {
     final value = context.watch<Model>();
     return Container(
+      color: Color.fromARGB(255, 41, 48, 76),
       child: Stack(
         children: [
           Positioned.fill(
@@ -68,66 +69,66 @@ class _WorldPageState extends State<WorldPage>
           ),
 
           SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
 
-                  GestureDetector(
-                    onTap: () {
-                      value.incrementBits();
-                      playSound('click');
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 15),
-                      child: Container(
-                        width: 380,
-                        height: 110,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 118, 129, 165),
-                          border: Border.all(
-                            color: const Color.fromARGB(255, 118, 129, 165),
-                            width: 4.5,
-                          ),
-                          borderRadius: BorderRadius.circular(1.5),
-                        ),
-                        child: SwitchImage(),
-                      ),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
+                GestureDetector(
+                  onTap: () {
+                    value.incrementBits();
+                    playSound('click');
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
                     child: Container(
                       width: double.infinity,
+                      height: 110,
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(108, 98, 104, 113),
-                        borderRadius: BorderRadius.circular(0.5),
+                        color: const Color.fromARGB(255, 118, 129, 165),
                         border: Border.all(
+                          color: const Color.fromARGB(255, 118, 129, 165),
                           width: 4.5,
-                          color: Color.fromARGB(255, 172, 180, 206),
                         ),
+                        borderRadius: BorderRadius.circular(1.5),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8.0),
+                      child: SwitchImage(),
+                    ),
+                  ),
+                ),
 
-                        child: Text(
-                          '${value.type} S H O P',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 230, 235, 248),
-                            fontSize: 20,
-                          ),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(108, 98, 104, 113),
+                      borderRadius: BorderRadius.circular(0.5),
+                      border: Border.all(
+                        width: 4.5,
+                        color: Color.fromARGB(255, 172, 180, 206),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+
+                      child: Text(
+                        '${value.type} S H O P',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 230, 235, 248),
+                          fontSize: 20,
                         ),
                       ),
                     ),
                   ),
+                ),
 
-                  // SCROLL
-                  SizedBox(
-                    height: 400,
+                // SCROLL
+                Expanded(
+                  child: Container(
                     child: RawScrollbar(
-                      thickness: 9.0,
-                      padding: EdgeInsets.only(right: 10, left: 13),
+                      thickness: 7.0,
+                      thumbColor: Color.fromARGB(255, 172, 180, 206),
+                      padding: EdgeInsets.only(left: 15, bottom: 4),
                       controller: _scrollController,
                       child: Padding(
                         padding: const EdgeInsets.only(
@@ -232,9 +233,8 @@ class _WorldPageState extends State<WorldPage>
                                   }
                                 },
                                 child: Container(
-                                  width: 160,
+                                  width: 150,
 
-                                  alignment: Alignment.bottomLeft,
                                   decoration: BoxDecoration(
                                     color: itembaseColor,
                                     borderRadius: BorderRadius.circular(0.5),
@@ -245,8 +245,8 @@ class _WorldPageState extends State<WorldPage>
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.only(
-                                      left: 11.0,
-                                      bottom: 4.0,
+                                      left: 13.0,
+                                      bottom: .0,
                                     ),
                                     child: Column(
                                       mainAxisAlignment:
@@ -317,8 +317,8 @@ class _WorldPageState extends State<WorldPage>
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],

@@ -33,6 +33,7 @@ class _ShopPageState extends State<ShopPage> {
         }
 
         return Container(
+          color: Color.fromARGB(255, 41, 48, 76),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
