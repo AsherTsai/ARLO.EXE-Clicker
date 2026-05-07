@@ -2,6 +2,7 @@ import 'package:computer_clicker_game/mainScreen.dart';
 import 'package:computer_clicker_game/pageSwitches.dart';
 import 'package:computer_clicker_game/shop.dart';
 import 'package:computer_clicker_game/world.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'model.dart';
@@ -36,11 +37,11 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     // CONSUMER - this is what allows us to use the variables and functions from the model file
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 194, 190, 205),
+      backgroundColor: Color.fromARGB(255, 213, 208, 222),
 
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(right: 20, left: 20, top: 15),
+          padding: const EdgeInsets.only(right: 20, left: 20),
           child: Column(
             children: [
               Consumer<Model>(
@@ -118,7 +119,7 @@ class _HomeState extends State<Home> {
 
               SizedBox(height: 15),
 
-              //ARLO
+              //COMPUTER DESK
               Container(
                 height: 170,
                 width: double.infinity,
@@ -285,7 +286,6 @@ class _HomeState extends State<Home> {
                 builder: (context, value, child) =>
                     SwitchPage(child: currentPage),
               ),
-              SizedBox(height: 15),
             ],
           ),
         ),

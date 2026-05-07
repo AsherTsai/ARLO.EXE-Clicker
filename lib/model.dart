@@ -4,11 +4,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class Model extends ChangeNotifier {
+  //USED AI TO ORGANIZE
+  //ADDED Shared Preferences and Audio Players
+
   final AudioPlayer bgMusicPlayer = AudioPlayer();
 
   Future<void> startBackgroundMusic() async {
     await bgMusicPlayer.setReleaseMode(ReleaseMode.loop);
-    await bgMusicPlayer.setVolume(0.4);
+    await bgMusicPlayer.setVolume(0.4); // Lower volume so clicks stand out
     await bgMusicPlayer.play(AssetSource('SFX/boogie.mp3'));
   }
 
