@@ -41,8 +41,8 @@ class _MainscreenState extends State<Mainscreen>
               child: Image.asset(
                 'assets/images/${value.quokka}${value.image}.png',
                 fit: BoxFit.cover,
-                height: 400,
-                width: 240,
+                height: 330,
+                width: 230,
               ),
             ),
             Positioned.fill(
