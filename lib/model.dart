@@ -135,9 +135,9 @@ class Model extends ChangeNotifier {
 
   String get formattedBits {
     if (_bits < 1000) return _bits.toString();
-    if (_bits < 1000000) return (_bits / 1000).toStringAsFixed(3);
-    if (_bits < 1000000000) return (_bits / 1000000).toStringAsFixed(3);
-    return (_bits / 1000000000).toStringAsFixed(3);
+    if (_bits < 1000000) return (_bits / 1000).toStringAsFixed(3) + " KB";
+    if (_bits < 1000000000) return (_bits / 1000000).toStringAsFixed(3) + " MB";
+    return (_bits / 1000000000).toStringAsFixed(3) + " GB";
   }
 
   String get quokka => _isBatteryDead ? 'dedquokka_' : 'quokka_';

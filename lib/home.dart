@@ -121,7 +121,7 @@ class _HomeState extends State<Home> {
 
               //COMPUTER DESK
               Container(
-                height: 170,
+                height: 200,
                 width: double.infinity,
 
                 decoration: BoxDecoration(

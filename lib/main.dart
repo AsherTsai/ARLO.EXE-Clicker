@@ -27,12 +27,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppBar(
-      systemOverlayStyle: SystemUiOverlayStyle(
-        // Status bar color
-        statusBarColor: Colors.red,
-      ),
-    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Home(),
