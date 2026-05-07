@@ -120,7 +120,7 @@ class _HomeState extends State<Home> {
 
               //ARLO
               Container(
-                height: 200,
+                height: 170,
                 width: double.infinity,
 
                 decoration: BoxDecoration(
