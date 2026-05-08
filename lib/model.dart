@@ -18,6 +18,8 @@ class Model extends ChangeNotifier {
     await _bgMusicPlayer.play(AssetSource('SFX/boogie.mp3'));
   }
 
+  Future<void> playsfx(String sound) async {
+    _sfxPlayer.seek(Duration.zero);
     await _sfxPlayer.play(
       AssetSource('SFX/${sound}.mp3'),
       mode: PlayerMode.lowLatency,
