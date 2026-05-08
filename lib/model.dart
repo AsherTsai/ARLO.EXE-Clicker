@@ -4,9 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class Model extends ChangeNotifier {
-  //USED AI TO ORGANIZE
-  //ADDED Shared Preferences and Audio Players
-
   final AudioPlayer bgMusicPlayer = AudioPlayer();
 
   Future<void> startBackgroundMusic() async {
