@@ -1,15 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class Model extends ChangeNotifier {
-  final AudioPlayer bgMusicPlayer = AudioPlayer();
+  final AudioPlayer _bgMusicPlayer = AudioPlayer();
+  final AudioPlayer _sfxPlayer = AudioPlayer();
+
+  AppAudioController() {
+    _bgMusicPlayer.setReleaseMode(ReleaseMode.loop);
+  }
 
   Future<void> startBackgroundMusic() async {
-    await bgMusicPlayer.setReleaseMode(ReleaseMode.loop);
-    await bgMusicPlayer.setVolume(0.4);
-    await bgMusicPlayer.play(AssetSource('SFX/boogie.mp3'));
+    await _bgMusicPlayer.stop();
+    await _bgMusicPlayer.setVolume(0.4);
+    await _bgMusicPlayer.play(AssetSource('SFX/boogie.mp3'));
+  }
+
+    await _sfxPlayer.play(
+      AssetSource('SFX/${sound}.mp3'),
+      mode: PlayerMode.lowLatency,
+    );
+  }
+
+  @override
+  void dispose() {
+    _bgMusicPlayer.dispose();
+    _sfxPlayer.dispose();
+    _timer?.cancel();
+    super.dispose();
   }
 
   // VARS
@@ -273,11 +293,5 @@ class Model extends ChangeNotifier {
       }
       notifyListeners();
     });
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
   }
 }

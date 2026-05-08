@@ -2,7 +2,6 @@ import 'package:computer_clicker_game/spaceBar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'model.dart';
-import 'package:audioplayers/audioplayers.dart';
 
 class WorldPage extends StatefulWidget {
   const WorldPage({super.key});
@@ -16,22 +15,13 @@ class _WorldPageState extends State<WorldPage>
   final ScrollController _scrollController = ScrollController();
   late AnimationController _scanlineController;
 
-  final AudioPlayer sfxPlayer = AudioPlayer();
-
   bool itemAvailability(int bits, int itemPrice) {
     return bits >= itemPrice;
-  }
-
-  void playSound(String sound) async {
-    await sfxPlayer.resume();
   }
 
   @override
   void initState() {
     super.initState();
-
-    sfxPlayer.setPlayerMode(PlayerMode.lowLatency);
-    sfxPlayer.setSource(AssetSource('SFX/click.mp3'));
 
     _scanlineController = AnimationController(
       vsync: this,
@@ -43,8 +33,6 @@ class _WorldPageState extends State<WorldPage>
   void dispose() {
     _scanlineController.dispose();
     _scrollController.dispose();
-
-    sfxPlayer.dispose();
     super.dispose();
   }
 
@@ -76,7 +64,7 @@ class _WorldPageState extends State<WorldPage>
                 GestureDetector(
                   onTap: () {
                     value.incrementBits();
-                    playSound('click');
+                    value.playsfx('click');
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(left: 15, right: 15),
@@ -164,7 +152,7 @@ class _WorldPageState extends State<WorldPage>
                               child: GestureDetector(
                                 onTap: () {
                                   if (isAffordable) {
-                                    playSound('shopBuy');
+                                    value.playsfx('shopBuy');
                                     // Passes the current item's stats to the shop function
                                     value.shopPlus(itemValue, itemCost);
                                     value.shopHitPlus(itemHitValue, itemCost);
@@ -200,7 +188,7 @@ class _WorldPageState extends State<WorldPage>
                                       ),
                                     );
                                   } else {
-                                    playSound('shopPress');
+                                    value.playsfx('shopPress');
                                     final messenger = ScaffoldMessenger.of(
                                       context,
                                     );
