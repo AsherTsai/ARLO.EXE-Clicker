@@ -4,15 +4,34 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class Model extends ChangeNotifier {
-  //USED AI TO ORGANIZE
-  //ADDED Shared Preferences and Audio Players
+  final AudioPlayer _bgMusicPlayer = AudioPlayer();
+  final AudioPlayer _sfxPlayer = AudioPlayer();
 
-  final AudioPlayer bgMusicPlayer = AudioPlayer();
+  AppAudioController() {
+    _bgMusicPlayer.setReleaseMode(ReleaseMode.loop);
+    _sfxPlayer.setReleaseMode(ReleaseMode.stop);
+  }
 
   Future<void> startBackgroundMusic() async {
-    await bgMusicPlayer.setReleaseMode(ReleaseMode.loop);
-    await bgMusicPlayer.setVolume(0.4); // Lower volume so clicks stand out
-    await bgMusicPlayer.play(AssetSource('SFX/boogie.mp3'));
+    await _bgMusicPlayer.stop();
+    await _bgMusicPlayer.setVolume(0.4);
+    await _bgMusicPlayer.play(AssetSource('SFX/boogie.mp3'));
+  }
+
+  Future<void> playsfx(String sound) async {
+    _sfxPlayer.seek(Duration.zero);
+    await _sfxPlayer.play(
+      AssetSource('SFX/${sound}.mp3'),
+      mode: PlayerMode.lowLatency,
+    );
+  }
+
+  @override
+  void dispose() {
+    _bgMusicPlayer.dispose();
+    _sfxPlayer.dispose();
+    _timer?.cancel();
+    super.dispose();
   }
 
   // VARS
@@ -135,9 +154,9 @@ class Model extends ChangeNotifier {
 
   String get formattedBits {
     if (_bits < 1000) return _bits.toString();
-    if (_bits < 1000000) return (_bits / 1000).toStringAsFixed(3) + " KB";
-    if (_bits < 1000000000) return (_bits / 1000000).toStringAsFixed(3) + " MB";
-    return (_bits / 1000000000).toStringAsFixed(3) + " GB";
+    if (_bits < 1000000) return (_bits / 1000).toStringAsFixed(3);
+    if (_bits < 1000000000) return (_bits / 1000000).toStringAsFixed(3);
+    return (_bits / 1000000000).toStringAsFixed(3);
   }
 
   String get quokka => _isBatteryDead ? 'dedquokka_' : 'quokka_';
@@ -276,11 +295,5 @@ class Model extends ChangeNotifier {
       }
       notifyListeners();
     });
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
   }
 }

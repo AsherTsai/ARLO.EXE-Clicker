@@ -2,7 +2,6 @@ import 'package:computer_clicker_game/mainScreen.dart';
 import 'package:computer_clicker_game/pageSwitches.dart';
 import 'package:computer_clicker_game/shop.dart';
 import 'package:computer_clicker_game/world.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'model.dart';
