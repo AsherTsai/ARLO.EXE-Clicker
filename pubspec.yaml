@@ -51,6 +51,8 @@ flutter_icons:
   android: true
   ios: true
   image_path: "assets/ARLOGO.png"
+  adaptive_icon_foreground: "assets/ARLOGO front.png"
+  adaptive_icon_background: "assets/ARLOGO back.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -92,6 +94,7 @@ flutter:
     - assets/health bar/15.png
     - assets/health bar/16.png
     - assets/kbItems/
+    - assets/
     - assets/heart.png
     - assets/mbItems/
     - assets/gbItems/
