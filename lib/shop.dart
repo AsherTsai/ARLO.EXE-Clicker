@@ -15,31 +15,17 @@ class _ShopPageState extends State<ShopPage> {
   Widget build(BuildContext context) {
     return Consumer<Model>(
       builder: (context, value, child) {
-        final clickPlayer = AudioPlayer();
-
-        @override
-        void initState() {
-          super.initState();
-          clickPlayer.setPlayerMode(PlayerMode.lowLatency);
-          clickPlayer.setSource(AssetSource('SFX/click.mp3'));
-        }
-
         bool isAffordable = (value.bits >= value.batteryCurrentCosts);
 
-        void clickSound(sound) async {
-          await clickPlayer.seek(Duration.zero);
-          await clickPlayer.resume();
-          ;
-        }
-
         return Container(
+          color: Color.fromARGB(255, 41, 48, 76),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
               onTap: () {
                 if (value.health == 0) {
                   final messenger = ScaffoldMessenger.of(context);
-                  clickSound('shopPress');
+                  value.playsfx('shopPress');
 
                   messenger.removeCurrentSnackBar();
 
@@ -69,7 +55,7 @@ class _ShopPageState extends State<ShopPage> {
                   );
                 } else {
                   if (isAffordable) {
-                    clickSound('shopBuy');
+                    value.playsfx('shopBuy');
                     value.repairComputer();
                     final messenger = ScaffoldMessenger.of(context);
 
@@ -100,7 +86,7 @@ class _ShopPageState extends State<ShopPage> {
                       ),
                     );
                   } else {
-                    clickSound('shopPress');
+                    value.playsfx('shopPress');
                     final messenger = ScaffoldMessenger.of(context);
 
                     messenger.removeCurrentSnackBar();
@@ -132,75 +118,80 @@ class _ShopPageState extends State<ShopPage> {
                   }
                 }
               },
-              child: Container(
-                height: 320,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
 
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(
-                    255,
-                    172,
-                    164,
-                    232,
-                  ).withOpacity(0.09),
-                  borderRadius: BorderRadius.circular(0.5),
-                  border: Border.all(
-                    width: 4.5,
-                    color: const Color.fromARGB(255, 139, 146, 164),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(
+                      255,
+                      172,
+                      164,
+                      232,
+                    ).withOpacity(0.09),
+                    borderRadius: BorderRadius.circular(0.5),
+                    border: Border.all(
+                      width: 4.5,
+                      color: const Color.fromARGB(255, 139, 146, 164),
+                    ),
                   ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 16.0,
-                    right: 11,
-                    bottom: 10.0,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0, bottom: 6.0),
-                        child: Image.asset(
-                          'assets/heart.png',
-                          fit: BoxFit.contain,
-                          height: 45,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 16.0,
+                      right: 11,
+                      bottom: 10.0,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 10.0,
+                            bottom: 6.0,
+                          ),
+                          child: Image.asset(
+                            'assets/heart.png',
+                            fit: BoxFit.contain,
+                            height: 45,
+                          ),
                         ),
-                      ),
 
-                      const Text(
-                        "Computer Repair",
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 244, 246, 253),
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                        const Text(
+                          "Computer Repair",
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 244, 246, 253),
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Text(
-                        '${value.batteryCurrentCosts} Bits',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 244, 246, 253),
-                          fontSize: 23,
+                        Text(
+                          '${value.batteryCurrentCosts} Bits',
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 244, 246, 253),
+                            fontSize: 23,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 10),
-                      const Text(
-                        "REPAIRS YOUR COMPUTER! BACK AT FULL HEALTH!",
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 244, 246, 253),
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                        SizedBox(height: 10),
+                        const Text(
+                          "REPAIRS YOUR COMPUTER! BACK AT FULL HEALTH!",
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 244, 246, 253),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 10),
-                      const Text(
-                        "INFO: when your computer is broken, your AUTO will be set back to DEFAULT until fixed >;",
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 244, 246, 253),
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                        SizedBox(height: 10),
+                        const Text(
+                          "INFO: when your computer is broken, your AUTO will be set back to DEFAULT until fixed >;",
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 244, 246, 253),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
