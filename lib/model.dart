@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class Model extends ChangeNotifier {
+  Model() {
+    _bgMusicPlayer.setReleaseMode(ReleaseMode.loop);
+    _sfxPlayer.setReleaseMode(ReleaseMode.stop);
+    _init();
+  }
+  SharedPreferences? _prefs;
   final AudioPlayer _bgMusicPlayer = AudioPlayer();
   final AudioPlayer _sfxPlayer = AudioPlayer();
 
-  AppAudioController() {
-    _bgMusicPlayer.setReleaseMode(ReleaseMode.loop);
-    _sfxPlayer.setReleaseMode(ReleaseMode.stop);
-  }
-
   Future<void> startBackgroundMusic() async {
-    await _bgMusicPlayer.stop();
-    await _bgMusicPlayer.setVolume(0.4);
-    await _bgMusicPlayer.play(AssetSource('SFX/boogie.mp3'));
+    _bgMusicPlayer.stop();
+    _bgMusicPlayer.setVolume(0.4);
+    _bgMusicPlayer.play(AssetSource('SFX/boogie.mp3'));
   }
 
   Future<void> playsfx(String sound) async {
     _sfxPlayer.seek(Duration.zero);
-    await _sfxPlayer.play(
+    _sfxPlayer.play(
       AssetSource('SFX/${sound}.mp3'),
       mode: PlayerMode.lowLatency,
     );
@@ -109,14 +109,11 @@ class Model extends ChangeNotifier {
   final List<int> tbItemValues = [48, 52, 55, 58, 62];
   final List<int> tbItemHitValues = [16, 17, 18, 19, 20];
 
-  // CONSTRUCTOR
-  Model() {
-    _init();
-  }
 
   Future<void> _init() async {
-    await loadData();
-    await startBackgroundMusic();
+    _prefs = await SharedPreferences.getInstance(); // Get it once here
+    loadData();
+    startBackgroundMusic();
     startLoop();
   }
 
@@ -133,14 +130,13 @@ class Model extends ChangeNotifier {
   }
 
   Future<void> loadData() async {
-    final prefs = await SharedPreferences.getInstance();
-    _bits = prefs.getInt('bits') ?? 0;
-    _clicks = prefs.getInt('clicks') ?? 1;
-    _plus = prefs.getInt('plus') ?? 0;
-    _health = prefs.getInt('health') ?? 0;
-    _rank = prefs.getInt('rank') ?? 0;
-    _costumes = prefs.getInt('costumes') ?? 1;
-    _isBatteryDead = prefs.getBool('isBatteryDead') ?? false;
+    _bits = _prefs!.getInt('bits') ?? 0;
+    _clicks = _prefs!.getInt('clicks') ?? 1;
+    _plus = _prefs!.getInt('plus') ?? 0;
+    _health = _prefs!.getInt('health') ?? 0;
+    _rank = _prefs!.getInt('rank') ?? 0;
+    _costumes = _prefs!.getInt('costumes') ?? 1;
+    _isBatteryDead = _prefs!.getBool('isBatteryDead') ?? false;
     notifyListeners();
   }
 
@@ -214,7 +210,6 @@ class Model extends ChangeNotifier {
     _bits += _clicks;
     switchDaImage();
     updateRank();
-    saveData();
     notifyListeners();
   }
 
@@ -260,13 +255,19 @@ class Model extends ChangeNotifier {
     }
   }
 
+  bool isAnimating = false;
+
   void switchDaImage() async {
-    if (_image == 1) {
-      _image = 2;
-      notifyListeners();
-      await Future.delayed(const Duration(milliseconds: 60));
-      _image = 1;
-      notifyListeners();
+    if (!isAnimating) {
+      isAnimating = true;
+      if (_image == 1) {
+        _image = 2;
+        notifyListeners();
+        await Future.delayed(const Duration(milliseconds: 60));
+        _image = 1;
+        notifyListeners();
+        isAnimating = false;
+      }
     }
   }
 
