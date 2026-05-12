@@ -41,6 +41,7 @@ dependencies:
   flutter_animate: ^4.0.0
   audioplayers: ^6.6.0
   shared_preferences: ^2.5.5
+  flame_audio: ^2.12.1
 
 dev_dependencies:
   flutter_test:
@@ -104,7 +105,7 @@ flutter:
     - assets/images/dedquokka_1.png
     - assets/images/dedquokka_2.png
     - assets/images/spaceKey/
-    - assets/SFX/
+    - assets/audio/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

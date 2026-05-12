@@ -1,41 +1,33 @@
+import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 class Model extends ChangeNotifier {
   Model() {
-    _bgMusicPlayer.setReleaseMode(ReleaseMode.loop);
-    _sfxPlayer.setReleaseMode(ReleaseMode.stop);
     _init();
   }
   SharedPreferences? _prefs;
-  final AudioPlayer _bgMusicPlayer = AudioPlayer();
-  final AudioPlayer _sfxPlayer = AudioPlayer();
-
-  Future<void> startBackgroundMusic() async {
-    _bgMusicPlayer.stop();
-    _bgMusicPlayer.setVolume(0.4);
-    _bgMusicPlayer.play(AssetSource('SFX/boogie.mp3'));
-  }
 
   Future<void> playsfx(String sound) async {
-    _sfxPlayer.seek(Duration.zero);
-    _sfxPlayer.play(
-      AssetSource('SFX/${sound}.mp3'),
-      mode: PlayerMode.lowLatency,
-    );
+    if (sound == 'click' && _clickPool != null) {
+      _clickPool!.start();
+    }else{
+       FlameAudio.play('$sound.mp3');
+
+    }
+   
   }
 
   @override
   void dispose() {
-    _bgMusicPlayer.dispose();
-    _sfxPlayer.dispose();
     _timer?.cancel();
     super.dispose();
   }
 
   // VARS
+  AudioPool? _clickPool;
   int _bits = 0;
   int _clicks = 1;
   int _plus = 0;
@@ -109,24 +101,31 @@ class Model extends ChangeNotifier {
   final List<int> tbItemValues = [48, 52, 55, 58, 62];
   final List<int> tbItemHitValues = [16, 17, 18, 19, 20];
 
-
   Future<void> _init() async {
+    _clickPool = await AudioPool.create(
+      source: AssetSource('audio/click.mp3'),
+      maxPlayers: 5,
+    );
+
+    FlameAudio.bgm.initialize();
+    FlameAudio.bgm.play('boogie.mp3', volume: 0.3);
+
     _prefs = await SharedPreferences.getInstance(); // Get it once here
     loadData();
-    startBackgroundMusic();
+
     startLoop();
   }
 
   // SAVE DATA
-  Future<void> saveData() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('bits', _bits);
-    await prefs.setInt('clicks', _clicks);
-    await prefs.setInt('plus', _plus);
-    await prefs.setInt('health', _health);
-    await prefs.setInt('rank', _rank);
-    await prefs.setInt('costumes', _costumes);
-    await prefs.setBool('isBatteryDead', _isBatteryDead);
+  void saveData() async {
+    if (_prefs == null) return;
+    _prefs!.setInt('bits', _bits);
+    _prefs!.setInt('clicks', _clicks);
+    _prefs!.setInt('plus', _plus);
+    _prefs!.setInt('health', _health);
+    _prefs!.setInt('rank', _rank);
+    _prefs!.setInt('costumes', _costumes);
+    _prefs!.setBool('isBatteryDead', _isBatteryDead);
   }
 
   Future<void> loadData() async {
