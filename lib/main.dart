@@ -11,10 +11,8 @@ void main() async {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
-      // Initialize window manager and set the maximum window size for desktop platforms
     ]);
   }
-  // For mobile platforms, we can set the orientation to portrait
 
   runApp(
     // PROVIDER
@@ -27,12 +25,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppBar(
-      systemOverlayStyle: SystemUiOverlayStyle(
-        // Status bar color
-        statusBarColor: Colors.red,
-      ),
-    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Home(),

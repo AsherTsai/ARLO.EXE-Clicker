@@ -1,4 +1,3 @@
-import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -110,7 +109,7 @@ class Model extends ChangeNotifier {
     FlameAudio.bgm.initialize();
     FlameAudio.bgm.play('boogie.mp3', volume: 0.3);
 
-    _prefs = await SharedPreferences.getInstance(); // Get it once here
+    _prefs = await SharedPreferences.getInstance(); 
     loadData();
 
     startLoop();

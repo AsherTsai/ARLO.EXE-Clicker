@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'model.dart';
 
-
 class ShopPage extends StatefulWidget {
   const ShopPage({super.key});
 
@@ -28,8 +27,6 @@ class _ShopPageState extends State<ShopPage> {
                   value.playsfx('shopPress');
 
                   messenger.removeCurrentSnackBar();
-
-                  // 2. Trigger the new one
                   messenger.showSnackBar(
                     SnackBar(
                       backgroundColor: const Color.fromARGB(
@@ -50,7 +47,7 @@ class _ShopPageState extends State<ShopPage> {
                       ),
                       duration: Duration(
                         milliseconds: 2000,
-                      ), // Shorter duration for spammy actions
+                      ),
                     ),
                   );
                 } else {
@@ -82,7 +79,7 @@ class _ShopPageState extends State<ShopPage> {
                         ),
                         duration: Duration(
                           milliseconds: 2000,
-                        ), // Shorter duration for spammy actions
+                        ), 
                       ),
                     );
                   } else {
@@ -112,7 +109,7 @@ class _ShopPageState extends State<ShopPage> {
                         ),
                         duration: Duration(
                           milliseconds: 2000,
-                        ), // Shorter duration for spammy actions
+                        ),
                       ),
                     );
                   }

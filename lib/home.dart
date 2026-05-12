@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
                       BoxShadow(
                         color: Color.fromARGB(255, 60, 70, 103),
 
-                        offset: Offset(0, 5), // changes position of shadow
+                        offset: Offset(0, 5), 
                       ),
                     ],
                     color: Color.fromARGB(255, 226, 222, 235),
