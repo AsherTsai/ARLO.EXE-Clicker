@@ -25,7 +25,7 @@ I also used AI to organize the provider/model class b/c it was really messy, but
 
 ---
 
-##demo
+## demo
 
 <img src="assets/demoo.gif" width="400">
 
