@@ -1,17 +1,101 @@
-# computer_clicker_game
+# 📱 ARLO.EXE Clicker
 
-A new Flutter project.
+A simple retro clicker game for Android. 
 
-## Getting Started
+---
+<img src="assets/ARLOGO.png" width="250">
 
-This project is a starting point for a Flutter application.
+## game features
 
-A few resources to get you started if this is your first Flutter project:
+- fun idle clicker
+- satisfying sounds
+- responsive clicks and taps
+- chill music
+- auto click system
+- progression system
+- computer health and repairing mechanics
+- shop upgrades and money system
+- stats
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+  
+## ui features
+- retro-themed UI
+- cool colors
+- w art by me
+- animations
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## screenshots
+
+| Home | Profile | Settings |
+|------|----------|-----------|
+| ![](screenshots/home.png) | ![](screenshots/profile.png) | ![](screenshots/settings.png) |
+
+---
+
+# install it!!
+
+## With Code editor 
+
+First, get these installed: 
+
+- Flutter SDK
+- Dart SDK
+- VS Code or Android Studio
+- emulator or Android device
+
+Run to check the installation: 
+
+```bash
+flutter doctor
+```
+
+clone the repo:
+
+```bash
+git clone https://github.com/AsherTsai/ARLO.EXE-Clicker.git
+```
+
+Go into the project folder:
+
+```bash
+cd ARLO.EXE-Clicker
+```
+
+install dependencies:
+
+```bash
+flutter pub get
+```
+
+Run the app:
+
+```bash
+flutter run
+```
+
+## With APK File
+
+1. Go to project releases
+2. Download APK for Android
+3. Install and enjoy!!
+
+---
+
+
+
+## made with
+
+- Flutter
+- Dart
+- Provider 
+
+
+## license
+
+This project is licensed under the MIT License.
+
+---
+
+made by Asher Tsai
