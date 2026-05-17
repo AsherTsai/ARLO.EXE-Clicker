@@ -24,7 +24,9 @@ I used AI to help me make the shared preferences (data saving), sound system, an
 I also used AI to organize the provider/model class b/c it was really messy, but everything in there I did myself, except for the things listed above. 
 
 ---
+
 ##demo
+<img src="assets/demoo.gif" width="400">
 
 
 ## game features
